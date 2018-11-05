@@ -1,23 +1,34 @@
 <?php
 
 return [
-    'name'        => 'Mautic Twig Plugin Skeleton',
-    'description' => 'Skeleton bundle to use as a reference when writing your own Twig plugin for Mautic.',
+    'name'        => 'Mautic Maestro Plugin',
+    'description' => 'Maestro plugin',
     'version'     => '1.0',
-    'author'      => 'Don Gilbert',
+    'author'      => 'Mitresh Pandya',
+
+    'routes' => [
+        'main' => [
+            'mautic_maestro_index' => [
+                'path'       => '/maestro',
+                'controller' => 'MauticMaestroBundle:Monitoring:index',
+            ],
+        ],
+    ],
+
     'services' => [
+        'models' => [
+            "mautic.maestro.model.maestro" => [
+                'class' => \MauticPlugin\MauticMaestroBundle\Model\MaestroModel::class,
+                'arguments' => [
+                    'doctrine.orm.entity_manager'
+                ],
+            ]
+        ],
         'events' => [
             // Register any event listeners
         ],
         'other' => [
-            // Twig
-            'templating.twig.extension.my_extension' => [
-                'class'     => \MauticPlugin\MauticTwigExtensionBundle\Twig\Extension\MyExtension::class,
-                'arguments' => [
-                    // whatever arguments
-                ],
-                'tag' => 'twig.extension',
-            ],
+            
         ],
     ],
 ];
